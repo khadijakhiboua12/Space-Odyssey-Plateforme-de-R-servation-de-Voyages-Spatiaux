@@ -29,3 +29,26 @@ loginBtn.addEventListener("click", (e) => {
     alert("Email ou mot de passe incorrect !");
   }
 });
+//L'AFFICHAGE D'UNE BUTTON LOGOUT  UNE FOIS FAIT LOGIN IN
+const userInfo=document.getElementById("userInfo");
+const logoutBtn=document.getElementById("logoutBtn");
+
+const loggedUser=JSON.parse(localStorage.getItem('loggedUser'));
+
+if(userInfo && logoutBtn){
+if(loggedUser){
+ userInfo.textContent=`Logged in  as:${loggedUser.email}`;
+ logoutBtn.style.display='inline-block';
+}else{
+ userInfo.textContent='Not logged in';
+ logoutBtn.style.display='none';
+}
+
+//logout function
+logoutBtn.addEventListener('click',()=>{
+    localStorage.removeItem('loggedUser');
+    userInfo.textContent='Not logged in';
+    logoutBtn.style.display='none';
+    window.location.href = "login.html";
+});
+}

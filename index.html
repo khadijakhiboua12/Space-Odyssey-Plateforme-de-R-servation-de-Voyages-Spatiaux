@@ -149,8 +149,10 @@
                 </div>
                 <a href="index.html" class="font-orbitron text-xl font-bold text-glow">SpaceVoyager</a>
             </div>
-               //pour l'affichage d'email et  password
-                 <span id="welcom"></span> 
+               <!-- pour l'affichage d'email et  password -->
+                <div id="userInfo">Not logged in</div>
+                <button  id="logoutBtn" style="display: none;">Logout</button>
+
             
             <div class="hidden md:flex space-x-8">
                 <a href="index.html" class="nav-link hover:text-neon-blue transition-colors">Home</a>
@@ -409,5 +411,6 @@
             createStars();
         });
     </script>
+    <script src="main.js"></script>
 </body>
 </html>
