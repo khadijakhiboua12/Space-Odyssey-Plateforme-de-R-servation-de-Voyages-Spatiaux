@@ -194,10 +194,11 @@
   <h2 class="font-orbitron text-3xl font-bold mb-6 text-glow text-center">Journey Details</h2>
 
   <!-- Destination + Date -->
-  <div class="grid md:grid-cols-2 gap-6 mb-6">
+   <form id="booking-form">
+  <div >
     <div>
       <label class="block text-sm font-semibold mb-2">Destination</label>
-      <select class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3 focus:outline-none focus:border-neon-blue">
+      <select class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3 focus:outline-none focus:border-neon-blue"id="SelectDestination" >
         <option>Select your destination</option>
         <option>Mars</option>
         <option>Moon</option>
@@ -209,6 +210,7 @@
       <input type="date" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3 focus:outline-none focus:border-neon-blue">
     </div>
   </div>
+
 
   <!-- Number of Passengers -->
   <div class="mb-6">
@@ -268,7 +270,7 @@
     <button class="w-full border border-neon-blue/50 rounded-md py-3 hover:bg-space-blue/70 transition">Add Passenger</button>
     <button class="w-full btn-primary text-white py-3 rounded-md font-semibold">Confirm Booking</button>
   </div>
-
+</form>
   <!-- Footer Text -->
   <p class="text-center text-sm text-gray-400 mt-4">
     By confirming, you agree to our
