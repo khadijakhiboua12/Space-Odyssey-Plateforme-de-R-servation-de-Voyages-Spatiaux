@@ -60,10 +60,8 @@ if (userInfo && logoutBtn) {
 }
 //Pour destination
 let accommodation_data = [];
-
 let spacecraft_data = [];
 let booking_option_data = [];
-
 let destinations_data = [];
 
 function loadData() {
@@ -84,7 +82,7 @@ function Affiche_Destination_option() {
     const booking_form = document.getElementById("booking-form");
     if (booking_form) {
         const selectDest = document.getElementById("SelectDestination");
-        // selectDest.innerHTML = 'Select your destination';
+        
         destinations_data.forEach(dest => {
             const option = document.createElement("option");
             option.textContent = dest.name;
@@ -94,4 +92,73 @@ function Affiche_Destination_option() {
     }
 }
 loadData();
-//Fonction  de  
+//Fonction 
+const container = document.getElementById("passenger-forms-container");
+let maxPassengers = 1; // default
+
+// Event listener for radio buttons
+document.querySelectorAll(".passenger-radio").forEach(radio => {
+  radio.addEventListener("change", (e) => {
+    const value = e.target.value;
+    container.innerHTML = ""; // clear previous forms
+
+    if (value === "1") {
+      maxPassengers = 1;
+    } else if (value === "2") {
+      maxPassengers = 2;
+    } else {
+      maxPassengers = 3; // default 3, can be dynamic
+    }
+
+    // Generate forms
+    for (let i = 1; i <= maxPassengers; i++) {
+      container.appendChild(createPassengerForm(i));
+    }
+
+    // Add "Add Passenger" button only for Group
+    if (value === "3-6") {
+      const addBtn = document.createElement("button");
+      addBtn.textContent = "Add Passenger";
+      addBtn.type = "button";
+      addBtn.className = "border border-neon-blue/50 rounded-md py-2 px-4 mt-2 hover:bg-space-blue/70";
+      addBtn.addEventListener("click", () => {
+        if (container.children.length < 6) { // max 6
+          container.appendChild(createPassengerForm(container.children.length + 1));
+        }
+      });
+      container.appendChild(addBtn);
+    }
+  });
+});
+
+// Function to create a passenger form
+function createPassengerForm(index) {
+  const div = document.createElement("div");
+  div.className = "mb-6 p-4 border border-neon-blue/30 rounded-md";
+  div.innerHTML = `
+    <h3 class="font-orbitron text-xl mb-3">Passenger ${index}</h3>
+    <div class="grid md:grid-cols-2 gap-6 mb-4">
+      <div>
+        <label class="block text-sm font-semibold mb-2">First Name</label>
+        <input type="text" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter first name">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-2">Last Name</label>
+        <input type="text" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter last name">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-2">Email</label>
+        <input type="email" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter email">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-2">Phone</label>
+        <input type="tel" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter phone">
+      </div>
+    </div>
+    <div class="mb-4">
+      <label class="block text-sm font-semibold mb-2">Special Requirements</label>
+      <textarea rows="2" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-2" placeholder="Any special requests..."></textarea>
+    </div>
+  `;
+  return div;
+}

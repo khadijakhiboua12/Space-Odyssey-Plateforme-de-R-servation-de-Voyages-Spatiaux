@@ -211,13 +211,24 @@
 
   <!-- Number of Passengers -->
   <div class="mb-6">
-    <label class="block text-sm font-semibold mb-3">Number of Passengers</label>
-    <div class="flex flex-wrap gap-4">
-      <label><input type="radio" name="passengers" class="accent-neon-blue"> Solo Traveler</label>
-      <label><input type="radio" name="passengers" class="accent-neon-blue"> Couple (2)</label>
-      <label><input type="radio" name="passengers" class="accent-neon-blue"> Group (3–6)</label>
-    </div>
+  <label class="block text-sm font-semibold mb-3">Number of Passengers</label>
+  <div class="flex flex-wrap gap-4">
+    <label>
+      <input type="radio" name="passengers" value="1" class="passenger-radio accent-neon-blue">
+      Solo Traveler
+    </label>
+    <label>
+      <input type="radio" name="passengers" value="2" class="passenger-radio accent-neon-blue">
+      Couple (2)
+    </label>
+    <label>
+      <input type="radio" name="passengers" value="3-6" class="passenger-radio accent-neon-blue">
+      Group (3–6)
+    </label>
   </div>
+</div>
+
+  <div id="passenger-forms-container"></div>
 
   <!-- Accommodation Type -->
   <h3 class="font-orbitron text-xl mb-3">Accommodation Type</h3>
@@ -237,7 +248,7 @@
   </div>
 
   <!-- Personal Info -->
-  <h3 class="font-orbitron text-xl mb-3">Personal Information</h3>
+  <!-- <h3 class="font-orbitron text-xl mb-3">Personal Information</h3>
   <div class="grid md:grid-cols-2 gap-6 mb-6">
     <div>
       <label class="block text-sm font-semibold mb-2">First Name</label>
@@ -260,7 +271,7 @@
   <div class="mb-6">
     <label class="block text-sm font-semibold mb-2">Special Requirements</label>
     <textarea rows="3" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3 focus:outline-none focus:border-neon-blue" placeholder="Any special requirements or notes..."></textarea>
-  </div>
+  </div> -->
 
   <!-- Buttons -->
   <div class="space-y-4">
