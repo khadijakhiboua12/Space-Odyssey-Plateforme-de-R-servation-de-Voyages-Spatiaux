@@ -59,7 +59,7 @@ if (userInfo && logoutBtn) {
     });
 }
 //Pour destination
-let accommodation_data = [];
+
 let spacecraft_data = [];
 let booking_option_data = [];
 let destinations_data = [];
@@ -144,21 +144,109 @@ function createPassengerForm(index) {
     <div class="grid md:grid-cols-2 gap-6 mb-4">
       <div>
         <label class="block text-sm font-semibold mb-2">First Name</label>
-        <input type="text" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter first name">
+        <input type="text" class="first-name w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter first name">
       </div>
       <div>
         <label class="block text-sm font-semibold mb-2">Last Name</label>
-        <input type="text" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter last name">
+        <input type="text" class="last-name w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter last name">
       </div>
       <div>
         <label class="block text-sm font-semibold mb-2">Email</label>
-        <input type="email" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter email">
+        <input type="email" class="email w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter email">
       </div>
       <div>
         <label class="block text-sm font-semibold mb-2">Phone</label>
-        <input type="tel" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter phone">
+        <input type="tel" class="phone w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter phone">
       </div>
     </div>
   `;
   return div;
 }
+//Fonction pour la validation de formalaire de booking
+function  validatePassengerForm(){
+ const firsNames=document.querySelectorAll(".first-name");
+ const lastNames=document.querySelectorAll(".last-name");
+ const emails=document.querySelectorAll(".email");
+ const phones=document.querySelectorAll(".phone");
+ let valid=true;
+
+ for(let i=0;i<firsNames.length;i++){
+    if(!validateName(firsNames[i].value) || !validateName(lastNames[i].value) ||!validateEmail(emails[i].value) ||!validatePhone(phones[i].value)){
+        alert(`Erreur dans le formulaire du passager ${i+1}`);
+        valid=false;
+        break;
+}
+ }
+      if(valid){
+          alert("tout les passages sont valide");
+      }
+}
+
+//fonction pour  nom 
+function  validateName(name){
+    const regex=/^[A-Z-a-z]{2,20}$/;
+     return regex.test(name.trim());
+}
+//fonction pour email
+function validateEmail(email){
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+    return regex.test(email.trim());
+}
+//fonction pour phone
+function validatePhone(phone){
+    const regex=/^[0-9]{8,15}$/;
+    return regex.test(phone.trim());
+}
+
+document.querySelector(".btn-confirm-booking").addEventListener("click",(e)=>{
+    e.preventDefault();
+     validatePassengerForm();
+
+});
+
+//fonction accodimation
+let accommodations_data = [];
+
+// Charger les accommodations
+function loadAccommodations() {
+    fetch("accommodations.json")
+        .then(res => res.json())
+        .then(data => {
+            localStorage.setItem("accommodations", JSON.stringify(data.accommodations));
+            accommodations_data = data.accommodations;
+            console.log("Accommodations chargées :", accommodations_data);
+        })
+        .catch(err => console.log("Erreur JSON accommodations:", err));
+}
+
+// Afficher les accommodations selon la destination sélectionnée
+function showAccommodations(destinationId) {
+    const container = document.getElementById("accommodations-container");
+    container.innerHTML = ""; 
+
+    const filtered = accommodations_data.filter(acc => acc.availableOn.includes(destinationId));
+
+    filtered.forEach(acc => {
+        const div = document.createElement("div");
+        div.className = "p-4 rounded-lg border border-neon-blue/20 bg-space-blue/40 hover:border-neon-blue/70 hover:shadow-lg transition";
+        div.innerHTML = `
+            <h4 class="font-semibold text-neon-blue mb-2">${acc.name}</h4>
+            <p class="text-gray-300 text-sm">${acc.shortDescription}</p>
+        `;
+        container.appendChild(div);
+    });
+}
+
+// changement de destination
+document.getElementById("SelectDestination").addEventListener("change", (e) => {
+    const selectedDestination = e.target.value;
+    if (selectedDestination) {
+        showAccommodations(selectedDestination);
+    } else {
+        document.getElementById("accommodations-container").innerHTML = "";
+    }
+});
+
+
+loadData();           
+loadAccommodations(); 

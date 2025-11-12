@@ -232,20 +232,10 @@
 
   <!-- Accommodation Type -->
   <h3 class="font-orbitron text-xl mb-3">Accommodation Type</h3>
-  <div class="grid md:grid-cols-3 gap-4 mb-8">
-    <div class="p-4 rounded-lg border border-neon-blue/20 bg-space-blue/40 hover:border-neon-blue/70 hover:shadow-lg transition">
-      <h4 class="font-semibold text-neon-blue mb-2">Standard Cabin</h4>
-      <p class="text-gray-300 text-sm">Comfortable private quarters with basic amenities.</p>
-    </div>
-    <div class="p-4 rounded-lg border border-neon-blue/20 bg-space-blue/40 hover:border-neon-blue/70 hover:shadow-lg transition">
-      <h4 class="font-semibold text-neon-blue mb-2">Luxury Suite</h4>
-      <p class="text-gray-300 text-sm">Spacious suite with premium amenities and viewports.</p>
-    </div>
-    <div class="p-4 rounded-lg border border-neon-blue/20 bg-space-blue/40 hover:border-neon-blue/70 hover:shadow-lg transition">
-      <h4 class="font-semibold text-neon-blue mb-2">Zero-G Pod</h4>
-      <p class="text-gray-300 text-sm">Advanced accommodation with zero-gravity experience.</p>
-    </div>
-  </div>
+<div id="accommodations-container" class="grid md:grid-cols-3 gap-4 mb-8">
+  <!-- Les cards d'accommodation seront générées ici dynamiquement par JS -->
+</div>
+
 
   <!-- Personal Info -->
   <!-- <h3 class="font-orbitron text-xl mb-3">Personal Information</h3>
@@ -278,7 +268,7 @@
   <button type="button" class="btn-add-passenger w-full border border-neon-blue/50 rounded-md py-3 hover:bg-space-blue/70 transition">
     Add Passenger
   </button>
-  <button class="w-full btn-primary text-white py-3 rounded-md font-semibold">Confirm Booking</button>
+  <button class="btn-confirm-booking  w-full btn-primary text-white py-3 rounded-md font-semibold">Confirm Booking</button>
 </div>
 
 </form>
