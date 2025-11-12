@@ -94,47 +94,51 @@ function Affiche_Destination_option() {
 loadData();
 //Fonction 
 const container = document.getElementById("passenger-forms-container");
-let maxPassengers = 1; // default
+const addBtn = document.querySelector(".btn-add-passenger"); // ton bouton HTML existant
+let maxPassengers = 1;
 
-// Event listener for radio buttons
+// D'abord, cacher le bouton par défaut
+addBtn.style.display = "none";
+
+// Écouter les changements sur les radios
 document.querySelectorAll(".passenger-radio").forEach(radio => {
   radio.addEventListener("change", (e) => {
     const value = e.target.value;
-    container.innerHTML = ""; // clear previous forms
+    container.innerHTML = ""; // vider les anciens formulaires
+    addBtn.style.display = "none"; // masquer à chaque changement
 
     if (value === "1") {
       maxPassengers = 1;
-    } else if (value === "2") {
+      container.appendChild(createPassengerForm(1));
+    } 
+    else if (value === "2") {
       maxPassengers = 2;
-    } else {
-      maxPassengers = 3; // default 3, can be dynamic
-    }
-
-    // Generate forms
-    for (let i = 1; i <= maxPassengers; i++) {
-      container.appendChild(createPassengerForm(i));
-    }
-
-    // Add "Add Passenger" button only for Group
-    if (value === "3-6") {
-      const addBtn = document.createElement("button");
-      addBtn.textContent = "Add Passenger";
-      addBtn.type = "button";
-      addBtn.className = "border border-neon-blue/50 rounded-md py-2 px-4 mt-2 hover:bg-space-blue/70";
-      addBtn.addEventListener("click", () => {
-        if (container.children.length < 6) { // max 6
-          container.appendChild(createPassengerForm(container.children.length + 1));
-        }
-      });
-      container.appendChild(addBtn);
+      for (let i = 1; i <= 2; i++) {
+        container.appendChild(createPassengerForm(i));
+      }
+    } 
+    else if (value === "3-6") {
+      maxPassengers = 3; // départ avec 3 passagers
+      addBtn.style.display = "block"; // afficher le bouton existant
+      for (let i = 1; i <= 3; i++) {
+        container.appendChild(createPassengerForm(i));
+      }
     }
   });
 });
 
-// Function to create a passenger form
+// Quand on clique sur le bouton existant
+addBtn.addEventListener("click", () => {
+  const currentCount = container.querySelectorAll(".passenger-form").length;
+  if (currentCount < 6) {
+    container.appendChild(createPassengerForm(currentCount + 1));
+  }
+});
+
+// Fonction de création du formulaire passager
 function createPassengerForm(index) {
   const div = document.createElement("div");
-  div.className = "mb-6 p-4 border border-neon-blue/30 rounded-md";
+  div.className = "passenger-form mb-6 p-4 border border-neon-blue/30 rounded-md";
   div.innerHTML = `
     <h3 class="font-orbitron text-xl mb-3">Passenger ${index}</h3>
     <div class="grid md:grid-cols-2 gap-6 mb-4">
@@ -154,10 +158,6 @@ function createPassengerForm(index) {
         <label class="block text-sm font-semibold mb-2">Phone</label>
         <input type="tel" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter phone">
       </div>
-    </div>
-    <div class="mb-4">
-      <label class="block text-sm font-semibold mb-2">Special Requirements</label>
-      <textarea rows="2" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-2" placeholder="Any special requests..."></textarea>
     </div>
   `;
   return div;
