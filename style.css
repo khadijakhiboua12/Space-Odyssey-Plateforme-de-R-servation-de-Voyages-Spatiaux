@@ -856,3 +856,26 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 @media (prefers-color-scheme: light) {
   /* Light mode overrides if needed in future */
 }
+
+#stars-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: black;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 2s infinite ease-in-out alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}

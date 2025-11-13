@@ -23,6 +23,7 @@
         "Earth-rise observations"
       ],
       "price": 25000,
+      "duration":6,
       "currency": "USD",
       "departureFrequency": "Weekly",
       "bestTimeToVisit": "Year-round",
@@ -59,6 +60,7 @@
         "Martian dust storms"
       ],
       "price": 150000,
+      "duration":548,
       "currency": "USD",
       "departureFrequency": "Every 26 months (optimal launch window)",
       "bestTimeToVisit": "During Martian summer",
@@ -95,6 +97,7 @@
         "Cryovolcanic activity"
       ],
       "price": 450000,
+      "duration":4380,
       "currency": "USD",
       "departureFrequency": "Every 3 years",
       "bestTimeToVisit": "During orbital alignment",
@@ -131,6 +134,7 @@
         "Saturn's ring views"
       ],
       "price": 600000,
+      "duration":5110,
       "currency": "USD",
       "departureFrequency": "Every 5 years",
       "bestTimeToVisit": "During Titan's summer",
@@ -167,6 +171,7 @@
         "Spacewalk opportunities"
       ],
       "price": 50000,
+      "duration":4,
       "currency": "USD",
       "departureFrequency": "Twice monthly",
       "bestTimeToVisit": "Year-round",
@@ -203,6 +208,7 @@
         "Super-rotation wind observation"
       ],
       "price": 300000,
+      "duration":150,
       "currency": "USD",
       "departureFrequency": "Every 19 months",
       "bestTimeToVisit": "During optimal orbital alignment",

@@ -1,322 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpaceVoyager — Explore Beyond Earth</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'space-dark': '#0a0a18',
-                        'space-blue': '#1a1a2e',
-                        'space-purple': '#16213e',
-                        'neon-blue': '#0ea5e9',
-                        'neon-purple': '#8b5cf6',
-                        'neon-cyan': '#06b6d4',
-                    },
-                    fontFamily: {
-                        'orbitron': ['Orbitron', 'sans-serif'],
-                        'exo': ['Exo 2', 'sans-serif'],
-                    },
-                    backgroundImage: {
-                        'space-pattern': "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgxMzUpIj48cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjMWExYTJlIi8+PHBhdGggZD0iTTAgMTBoNDBNMTAgMHY0ME0wIDIwaDQwTTIwIDB2NDBNMCAzMGg0ME0zMCAwdjQwIiBzdHJva2U9IiMyNjEzZTQiIHN0cm9rZS13aWR0aD0iMC41Ii8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+')",
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background: linear-gradient(to bottom, #0a0a18, #1a1a2e, #16213e);
-            background-attachment: fixed;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 60%, rgba(139, 92, 246, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 40% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 20%);
-            z-index: -1;
-        }
-        
-        .star {
-            position: absolute;
-            background-color: white;
-            border-radius: 50%;
-            animation: twinkle 5s infinite;
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
-        }
-        
-        .glow {
-            box-shadow: 0 0 15px rgba(14, 165, 233, 0.5);
-        }
-        
-        .text-glow {
-            text-shadow: 0 0 10px rgba(14, 165, 233, 0.7);
-        }
-        
-        .card-hover {
-            transition: all 0.3s ease;
-            background: rgba(26, 26, 46, 0.7);
-            backdrop-filter: blur(10px);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(14, 165, 233, 0.3);
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(to right, #0ea5e9, #8b5cf6);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .planet-card {
-            background: rgba(22, 33, 62, 0.7);
-            border: 1px solid rgba(14, 165, 233, 0.3);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .planet-card:hover {
-            border-color: rgba(14, 165, 233, 0.7);
-            box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(to right, #0ea5e9, #8b5cf6);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(14, 165, 233, 0.4);
-        }
-        
-        .mobile-menu {
-            transition: all 0.3s ease;
-            max-height: 0;
-            overflow: hidden;
-        }
-        
-        .mobile-menu.open {
-            max-height: 300px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Your Journey — SpaceVoyager</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- <link rel="stylesheet" href="booking.css"> -->
+  <link rel="stylesheet" href="style.css">
+
 </head>
-<body class="text-white font-exo min-h-screen">
-    <!-- Stars Background -->
-    <div id="stars-container"></div>
+
+<body class="text-white font-exo min-h-screen bg-black">
+  <div id="stars-container"></div>
+
+  <nav class="bg-space-dark/80 backdrop-blur-md border-b border-neon-blue/20 sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-neon-blue to-neon-purple flex items-center justify-center glow">
+          <i class="fas fa-rocket text-white"></i>
+        </div>
+        <a href="index.html" class="font-orbitron text-xl font-bold text-glow">SpaceVoyager</a>
+      </div>
+      <div class="hidden md:flex space-x-8">
+        <a href="index.html" class="nav-link hover:text-neon-blue transition-colors">Home</a>
+        <a href="destinations.html" class="nav-link hover:text-neon-blue transition-colors">Destinations</a>
+        <a href="booking.html"  class="nav-link hover:text-neon-blue transition-colors text-neon-blue">Booking</a>
+        <a href="about.html" class="nav-link hover:text-neon-blue transition-colors">About</a>
+        <a id="nav-login" href="login.html">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 py-12 relative z-10">
+    <section class="text-center mb-12">
+      <h1 class="font-orbitron text-4xl md:text-5xl font-bold mb-4 text-glow">
+        Book Your Space Journey
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+        Begin your adventure to the stars. Fill out the form below to reserve your spot.
+      </p>
+    </section>
+
+    <div class="form-container max-w-4xl mx-auto p-8 bg-space-dark/50 backdrop-blur-sm rounded-xl border border-neon-blue/20">
+      <form id="booking-form" novalidate>
+        <!-- Journey Details -->
+        <div class="mb-8">
+          <h2 class="font-orbitron text-2xl mb-6 text-neon-blue">Journey Details</h2>
+
+          <!-- Destination -->
+          <div class="mb-6">
+            <label class="block mb-2 text-gray-300">Destination</label>
+            <select class="h-12 w-full rounded-md border border-gray-600 bg-space-dark/70 px-4 text-white focus:border-neon-blue focus:outline-none" id="destination" required>
+              <option value="">Select your destination</option>
+            </select>
+            <div class="error-message mt-1" id="destination-error"></div>
+          </div>
+
+          <!-- Destination Info -->
+          <div id="destination-info" class="destination-info hidden mt-6 p-6 bg-space-dark/70 rounded-lg border border-neon-blue/30">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h3 class="font-orbitron text-neon-blue mb-2" id="destination-name"></h3>
+                <p class="text-sm text-gray-300" id="destination-description"></p>
+              </div>
+              <div class="text-sm">
+                <div class="flex justify-between mb-1"><span class="text-gray-400">Travel Duration:</span><span id="destination-duration"></span></div>
+                <div class="flex justify-between mb-1"><span class="text-gray-400">Distance:</span><span id="destination-distance"></span></div>
+                <div class="flex justify-between mb-1"><span class="text-gray-400">Gravity:</span><span id="destination-gravity"></span></div>
+                <div class="flex justify-between mb-1"><span class="text-gray-400">Temperature:</span><span id="destination-temperature"></span></div>
+                <div class="flex justify-between"><span class="text-gray-400">Price:</span><span class="font-bold text-neon-cyan" id="destination-price"></span></div>
+              </div>
+            </div>
+            <div class="mt-4 text-right text-lg font-bold text-neon-purple" id="total-price-display"></div>
+          </div>
+
+          <!-- Departure Date -->
+          <div class="mb-6">
+            <label class="block mb-2 text-gray-300">Departure Date</label>
+            <input type="date" id="departure-date" required class="h-12 w-full rounded-md border border-gray-600 bg-space-dark/70 px-4 text-white focus:border-neon-blue focus:outline-none" />
+            <div class="error-message" id="departure-date-error"></div>
+          </div>
+
+          <!-- Passengers -->
+          <div class="mb-6">
+            <label class="block mb-3 text-gray-300">Number of Passengers</label>
+            <div class="flex flex-wrap gap-4">
+              <label><input type="radio" name="passengers" value="solo" class="mr-2" checked /> Solo</label>
+              <label><input type="radio" name="passengers" value="couple" class="mr-2" /> Couple (2)</label>
+              <label><input type="radio" name="passengers" value="group" class="mr-2" /> Group (3–6)</label>
+            </div>
+          </div>
+
+          <!-- Accommodations -->
+          <div class="mb-6" id="accommodations-section">
+            <label class="block mb-3 text-gray-300">Accommodation Type</label>
+            <div id="accommodations-container" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+            <input type="hidden" id="accommodation" value="" />
+            <div class="error-message" id="accommodation-error"></div>
+          </div>
+        </div>
+
+        <!-- Suit Size (Hidden by default) -->
+        <!-- <div id="suit-size-section" class="mb-6 hidden">
+          <label class="block mb-2 text-gray-300">Suit Size <span class="text-red-400">*</span></label>
+          <select id="suit-size" class="h-12 w-full rounded-md border border-gray-600 bg-space-dark/70 px-4 text-white focus:border-neon-blue focus:outline-none" required>
+            <option value="">-- Select size --</option>
+            <option value="S">Small</option>
+            <option value="M">Medium</option>
+            <option value="L">Large</option>
+            <option value="XL">X-Large</option>
+          </select>
+          <div class="error-message" id="suit-size-error"></div>
+        </div> -->
+
+      <!-- Personal Information -->
+<div class="mb-8">
+  <h2 class="font-orbitron text-2xl mb-6 text-neon-blue">Personal Information</h2>
+
+  <!-- Primary Passenger -->
+  <div class="passenger-form grid grid-cols-2 gap-6" id="passenger-form-0">
     
-    <!-- Navigation -->
-    <nav class="bg-space-dark/80 backdrop-blur-md border-b border-neon-blue/20 sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-r from-neon-blue to-neon-purple flex items-center justify-center glow">
-                    <i class="fas fa-rocket text-white"></i>
-                </div>
-                <a href="index.html" class="font-orbitron text-xl font-bold text-glow">SpaceVoyager</a>
-            </div>
-            
-            <div class="hidden md:flex space-x-8">
-                <a href="index.html" class="nav-link hover:text-neon-blue transition-colors">Home</a>
-                <a href="destinations.html" class="nav-link hover:text-neon-blue transition-colors">Destinations</a>
-                <a href="booking.html" class="nav-link hover:text-neon-blue transition-colors">Booking</a>
-                <a href="about.html" class="nav-link hover:text-neon-blue transition-colors">About</a>
-                <a href="login.html" class="nav-link hover:text-neon-blue transition-colors">Login</a>
-            </div>
-            
-            <!-- Mobile menu button -->
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-white focus:outline-none">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu md:hidden bg-space-dark/90 backdrop-blur-md">
-            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
-                <a href="index.html" class="hover:text-neon-blue transition-colors py-2 border-b border-neon-blue/20">Home</a>
-                <a href="destinations.html" class="hover:text-neon-blue transition-colors py-2 border-b border-neon-blue/20">Destinations</a>
-                <a href="Booking.html" class="hover:text-neon-blue transition-colors py-2 border-b border-neon-blue/20">Booking</a>
-                <a href="about.html" class="hover:text-neon-blue transition-colors py-2 border-b border-neon-blue/20">About</a>
-                <a href="login.html" class="hover:text-neon-blue transition-colors py-2">Login</a>
-            </div>
-        </div>
-    </nav>
-     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8 relative z-10">
-        <!-- Hero Section -->
-        <section class="py-16 md:py-24 text-center">
-            <h1 class="font-orbitron text-4xl md:text-6xl font-bold mb-6 text-glow">BOOK Your Space Journey</h1>
-            <p class="text-xl md:text-2xl max-w-2xl mx-auto mb-10 text-gray-300">
-               Begin your adventure to the stars .Fill out the from below to<br> reserve your spot on our next space voyage
-            </p>
-            <div class="flex flex-col md:flex-row justify-center gap-4">       
-            </div>
-        </section>
-     <!-- Booking Form Section -->
-    <section class="max-w-4xl mx-auto bg-space-purple/50 border border-neon-blue/30 rounded-2xl p-8 backdrop-blur-md shadow-lg">
-  <!-- Title -->
-  <h2 class="font-orbitron text-3xl font-bold mb-6 text-glow text-center">Journey Details</h2>
+    <!-- First Name -->
+    <div class="flex flex-col">
+      <label class="text-gray-300 mb-1">First Name <span class="text-red-400">*</span></label>
+      <input type="text" name="first-name[]" placeholder="Enter first name" required data-validation="name"
+        class="w-full h-12 rounded-md border border-gray-600 bg-space-dark/70 px-4 text-white focus:border-neon-blue focus:outline-none" />
+      <div class="error-message mt-1 text-sm"></div>
+    </div>
 
-  <!-- Destination + Date -->
-   <form id="booking-form">
-  <div >
-    <div>
-      <label for="SelectDestination"  class="block text-sm font-semibold mb-2">Destination</label>
-      <select class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3 focus:outline-none focus:border-neon-blue" id="SelectDestination" >
-        <option value="">Select your destination</option>
-      </select>
+    <!-- Last Name -->
+    <div class="flex flex-col">
+      <label class="text-gray-300 mb-1">Last Name <span class="text-red-400">*</span></label>
+      <input type="text" name="last-name[]" placeholder="Enter last name" required data-validation="name"
+        class="w-full h-12 rounded-md border border-gray-600 bg-space-dark/70 px-4 text-white focus:border-neon-blue focus:outline-none" />
+      <div class="error-message mt-1 text-sm"></div>
     </div>
-    <div>
-      <label class="block text-sm font-semibold mb-2">Departure Date</label>
-      <input type="date" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3 focus:outline-none focus:border-neon-blue">
+
+    <!-- Email -->
+    <div class="flex flex-col">
+      <label class="text-gray-300 mb-1">Email <span class="text-red-400">*</span></label>
+      <input type="email" name="email[]" placeholder="Enter email" required data-validation="email"
+        class="w-full h-12 rounded-md border border-gray-600 bg-space-dark/70 px-4 text-white focus:border-neon-blue focus:outline-none" />
+      <div class="error-message mt-1 text-sm"></div>
     </div>
+
+    <!-- Phone -->
+    <div class="flex flex-col">
+      <label class="text-gray-300 mb-1">Phone <span class="text-red-400">*</span></label>
+      <input type="tel" name="phone[]" placeholder="Enter phone" required data-validation="phone"
+        class="w-full h-12 rounded-md border border-gray-600 bg-space-dark/70 px-4 text-white focus:border-neon-blue focus:outline-none" />
+      <div class="error-message mt-1 text-sm"></div>
+    </div>
+
   </div>
 
+          <!-- Dynamic Passengers Container -->
+          <div id="passenger-forms-container"></div>
 
-  <!-- Number of Passengers -->
-  <div class="mb-6">
-  <label class="block text-sm font-semibold mb-3">Number of Passengers</label>
-  <div class="flex flex-wrap gap-4">
-    <label>
-      <input type="radio" name="passengers" value="1" class="passenger-radio accent-neon-blue">
-      Solo Traveler
-    </label>
-    <label>
-      <input type="radio" name="passengers" value="2" class="passenger-radio accent-neon-blue">
-      Couple (2)
-    </label>
-    <label>
-      <input type="radio" name="passengers" value="3-6" class="passenger-radio accent-neon-blue">
-      Group (3–6)
-    </label>
-  </div>
-</div>
-
-  <div id="passenger-forms-container"></div>
-
-  <!-- Accommodation Type -->
-  <h3 class="font-orbitron text-xl mb-3">Accommodation Type</h3>
-<div id="accommodations-container" class="grid md:grid-cols-3 gap-4 mb-8">
-  <!-- Les cards d'accommodation seront générées ici dynamiquement par JS -->
-</div>
-
-
-  <!-- Personal Info -->
-  <!-- <h3 class="font-orbitron text-xl mb-3">Personal Information</h3>
-  <div class="grid md:grid-cols-2 gap-6 mb-6">
-    <div>
-      <label class="block text-sm font-semibold mb-2">First Name</label>
-      <input type="text" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3 focus:outline-none focus:border-neon-blue" placeholder="Enter your first name">
-    </div>
-    <div>
-      <label class="block text-sm font-semibold mb-2">Last Name</label>
-      <input type="text" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3 focus:outline-none focus:border-neon-blue" placeholder="Enter your last name">
-    </div>
-    <div>
-      <label class="block text-sm font-semibold mb-2">Email Address</label>
-      <input type="email" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3 focus:outline-none focus:border-neon-blue" placeholder="Enter your email">
-    </div>
-    <div>
-      <label class="block text-sm font-semibold mb-2">Phone Number</label>
-      <input type="tel" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3 focus:outline-none focus:border-neon-blue" placeholder="Enter your phone number">
-    </div>
-  </div>
-
-  <div class="mb-6">
-    <label class="block text-sm font-semibold mb-2">Special Requirements</label>
-    <textarea rows="3" class="w-full bg-space-dark border border-neon-blue/30 rounded-md p-3 focus:outline-none focus:border-neon-blue" placeholder="Any special requirements or notes..."></textarea>
-  </div> -->
-
-  <!-- Buttons -->
-  <div class="space-y-4">
-  <button type="button" class="btn-add-passenger w-full border border-neon-blue/50 rounded-md py-3 hover:bg-space-blue/70 transition">
-    Add Passenger
-  </button>
-  <button class="btn-confirm-booking  w-full btn-primary text-white py-3 rounded-md font-semibold">Confirm Booking</button>
-</div>
-
-</form>
-  <!-- Footer Text -->
-  <p class="text-center text-sm text-gray-400 mt-4">
-    By confirming, you agree to our
-    <a href="#" class="text-neon-blue hover:underline">Terms of Service</a> and
-    <a href="#" class="text-neon-blue hover:underline">Space Travel Agreement</a>.
-  </p>
-</section>
-
-
-</main>
- <!-- Footer -->
-    <footer class="bg-space-dark border-t border-neon-blue/20 py-8 mt-12 relative z-10">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <div class="flex items-center space-x-2 mb-2">
-                        <div class="w-8 h-8 rounded-full bg-gradient-to-r from-neon-blue to-neon-purple flex items-center justify-center">
-                            <i class="fas fa-rocket text-white text-sm"></i>
-                        </div>
-                        <span class="font-orbitron text-lg">SpaceVoyager</span>
-                    </div>
-                    <p class="text-gray-400 text-sm">© 2023 SpaceVoyager. All rights reserved.</p>
-                </div>
-                
-                <div class="flex space-x-6 mb-4 md:mb-0">
-                    <a href="#" class="text-gray-400 hover:text-neon-blue transition-colors text-xl">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-neon-blue transition-colors text-xl">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-neon-blue transition-colors text-xl">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-neon-blue transition-colors text-xl">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>               
-                <div class="text-center md:text-right">
-                    <p class="text-gray-400 text-sm">Contact us: info@spacevoyager.com</p>
-                    <p class="text-gray-400 text-sm">+1 (800) SPACE-TRIP</p>
-                </div>
-            </div>
+          <button type="button" id="add-passenger-btn" class="btn-secondary px-8 py-3 rounded-lg font-bold mt-4 bg-neon-blue/20 hover:bg-neon-blue/30 transition">
+            Add Passenger
+          </button>
         </div>
-    </footer>
-    <script src="main.js"></script>
-    </body>
-    </html>
+
+        <button type="submit" class="btn-primary px-8 py-4 rounded-lg font-bold w-full glow bg-gradient-to-r from-neon-blue to-neon-purple hover:from-neon-purple hover:to-neon-blue transition">
+          Confirm Booking
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="bg-space-dark border-t border-neon-blue/20 py-8 mt-12 text-center">
+    <p class="text-gray-400 text-sm">© 2025 SpaceVoyager</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
