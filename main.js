@@ -549,11 +549,49 @@ document.addEventListener("DOMContentLoaded", function(){
     });
   });
 });
+//fonction de choisit une destination
+
+const destinationSelect = document.getElementById("destination");
+destinationSelect.addEventListener("change", function() {
+    const destinations = JSON.parse(localStorage.getItem("destinations")) || [];
+    const selected = destinations.find(d => d.id === this.value);
+    if (!selected) return;
+
+    const passengerCount = document.querySelectorAll(".passenger-form").length || 1;
+    const totalPrice = selected.price * passengerCount;
+
+   
+    localStorage.setItem("selectedDestination", JSON.stringify({
+        id: selected.id,
+        name: selected.name,
+        price: selected.price,
+        totalPrice: totalPrice
+    }));
+});
+
 
 //function de enregistrement
-function enregistrement(){
-     
+ function collectPassengerData() {
+  const passengers = [];
+  const passengerForms = document.querySelectorAll(".passenger-form");
+
+  passengerForms.forEach((form, index) => {
+    const inputs = form.querySelectorAll("input[data-validation]");
+    const passenger = {
+      id: Date.now() + index, 
+      firstName: inputs[0]?.value.trim() || "",
+      lastName: inputs[1]?.value.trim() || "",
+      email: inputs[2]?.value.trim() || "",
+      phone: inputs[3]?.value.trim() || "",
+      
+      isPrimary: index === 0 
+    };
+    passengers.push(passenger);
+  });
+
+  return passengers;
 }
+
 // submit
 document.getElementById("booking-form").addEventListener("submit", function(e){
   e.preventDefault();
@@ -565,15 +603,26 @@ document.getElementById("booking-form").addEventListener("submit", function(e){
     window.location.href = "login.html";
     return; 
   }
+
 //souvegarder  les donnes dans localStorage
-const bookings=JSON.parse(localStorage.getItem("booking")) || [];
-const newBooking={
-    id:Date.now(),
-    user:loggedUser.email,
-    date:new Date().toLocaleString(),
-};``
+
+const selectedDestination = JSON.parse(localStorage.getItem("selectedDestination")) || {};
+
+const newBooking = {
+  id: Date.now(),
+  user: loggedUser.email,
+  date: new Date().toLocaleString(),
+  destination: selectedDestination.name || "Non spécifiée",
+  price: selectedDestination.totalPrice || 0,
+  passengers: collectPassengerData()
+};
+
+const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 bookings.push(newBooking);
-localStorage.setItem("bookings",JSON.stringify(bookings));
+localStorage.setItem("bookings", JSON.stringify(bookings));
+
+console.log(bookings); 
+
 //fin de souvegard
  
   let valid = true;
@@ -595,3 +644,18 @@ localStorage.setItem("bookings",JSON.stringify(bookings));
 
   window.location.href = "mybooking.html";
 });
+
+//La page my booking pour afficher les inforamtions de booking avec un ticket
+const container=document.getElementById("booking-list");
+bookings.forEach(bookings=>{
+const card=document.createElement("div");
+card.className = "p-4 border rounded-lg bg-gray-900 text-white";
+card.innerHTML=`
+  <h3 class="text-x1 font-bold">Bokking#
+  <p><strong>Destination:</strong>${bookings.destination}<p>
+  <p<<strong>Total Price:</strong>${bookings.price}</p>
+  <h4 class="mt-2 font-semibold">Passenger:<h4>
+    `;
+  
+}) 
+
