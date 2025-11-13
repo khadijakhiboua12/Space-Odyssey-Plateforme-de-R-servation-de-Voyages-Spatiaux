@@ -351,16 +351,16 @@ let passengerCount = 1;
 let maxPassengers = 1;
 
 // create stars
-function createStars() {
-  const container = document.getElementById("stars-container");
-  for (let i = 0; i < 100; i++) {
-    const s = document.createElement("div");
-    s.classList.add("star");
-    s.style.left = Math.random() * 100 + "%";
-    s.style.top = Math.random() * 100 + "%";
-    container.appendChild(s);
-  }
-}
+// function createStars() {
+//   const container = document.getElementById("stars-container");
+//   for (let i = 0; i < 100; i++) {
+//     const s = document.createElement("div");
+//     s.classList.add("star");
+//     s.style.left = Math.random() * 100 + "%";
+//     s.style.top = Math.random() * 100 + "%";
+//     container.appendChild(s);
+//   }
+// }
 
 // update total price
 function updateTotalPrice() {
@@ -550,19 +550,32 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 });
 
+//function de enregistrement
+function enregistrement(){
+     
+}
 // submit
 document.getElementById("booking-form").addEventListener("submit", function(e){
   e.preventDefault();
- 
-//validation de login 
-const loggedIn=localStorage.getItem("loggedUser");
- console.log(loggedIn);
-if(loggedIn!=="true"){
-    alert("Veuillez vous connecter avent de confirmer la reservation!");
-    window.location.href="login.html";
-    return;
-}
 
+  
+  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+  if (!loggedUser) {
+    alert("Veuillez vous connecter avant de confirmer la réservation !");
+    window.location.href = "login.html";
+    return; 
+  }
+//souvegarder  les donnes dans localStorage
+const bookings=JSON.parse(localStorage.getItem("booking")) || [];
+const newBooking={
+    id:Date.now(),
+    user:loggedUser.email,
+    date:new Date().toLocaleString(),
+};``
+bookings.push(newBooking);
+localStorage.setItem("bookings",JSON.stringify(bookings));
+//fin de souvegard
+ 
   let valid = true;
   const inputs = document.querySelectorAll("[data-validation]");
   for (let i = 0; i < inputs.length; i++) {
@@ -570,14 +583,15 @@ if(loggedIn!=="true"){
   }
 
   if (!valid) {
-    alert(" Veuillez corriger les erreurs dans le formulaire.");
-    return;
+    alert("Veuillez corriger les erreurs dans le formulaire.");
+    return; 
   }
 
-  alert(" Réservation confirmée ! Votre voyage spatial vous attend !");
-  this.reset();
-
+  alert("Réservation confirmée ! Votre voyage spatial vous attend !");
+  this.reset(); 
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].style.borderColor = "";
   }
+
+  window.location.href = "mybooking.html";
 });
