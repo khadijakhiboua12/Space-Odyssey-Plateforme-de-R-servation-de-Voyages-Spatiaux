@@ -58,274 +58,8 @@ if (userInfo && logoutBtn) {
 
     });
 }
-//Pour destination
-
-// let spacecraft_data = [];
-// let booking_option_data = [];
-// let destinations_data = [];
-
-// function loadData() {
-//     fetch("destinations.json")
-//         .then(res => res.json())
-//         .then(data => {
-
-//             localStorage.setItem("destinations", JSON.stringify(data.destinations));
-//             destinations_data = data.destinations;
-//             console.log(" Destinations chargées :", destinations_data);
-//             Affiche_Destination_option();
-//         })
-//         .catch(err => console.log(" Erreur JSON:", err));
-// }
 
 
-// function Affiche_Destination_option() {
-//     const booking_form = document.getElementById("booking-form");
-//     if (booking_form) {
-//         const selectDest = document.getElementById("SelectDestination");
-        
-//         destinations_data.forEach(dest => {
-//             const option = document.createElement("option");
-//             option.textContent = dest.name;
-//             option.value = dest.id;
-//             selectDest.appendChild(option);
-//         });
-//     }
-// }
-// loadData();
-// //Fonction 
-// const container = document.getElementById("passenger-forms-container");
-// const addBtn = document.querySelector(".btn-add-passenger"); // ton bouton HTML existant
-// let maxPassengers = 1;
-
-// // D'abord, cacher le bouton par défaut
-// addBtn.style.display = "none";
-
-// // Écouter les changements sur les radios
-// document.querySelectorAll(".passenger-radio").forEach(radio => {
-//   radio.addEventListener("change", (e) => {
-//     const value = e.target.value;
-//     container.innerHTML = ""; // vider les anciens formulaires
-//     addBtn.style.display = "none"; // masquer à chaque changement
-
-//     if (value === "1") {
-//       maxPassengers = 1;
-//       container.appendChild(createPassengerForm(1));
-//     } 
-//     else if (value === "2") {
-//       maxPassengers = 2;
-//       for (let i = 1; i <= 2; i++) {
-//         container.appendChild(createPassengerForm(i));
-//       }
-//     } 
-//     else if (value === "3-6") {
-//       maxPassengers = 3; // départ avec 3 passagers
-//       addBtn.style.display = "block"; // afficher le bouton existant
-//       for (let i = 1; i <= 3; i++) {
-//         container.appendChild(createPassengerForm(i));
-//       }
-//     }
-//   });
-// });
-
-// // Quand on clique sur le bouton existant
-// addBtn.addEventListener("click", () => {
-//   const currentCount = container.querySelectorAll(".passenger-form").length;
-//   if (currentCount < 6) {
-//     container.appendChild(createPassengerForm(currentCount + 1));
-//   }
-// });
-
-// // Fonction de création du formulaire passager
-// function createPassengerForm(index) {
-//   const div = document.createElement("div");
-//   div.className = "passenger-form mb-6 p-4 border border-neon-blue/30 rounded-md";
-//   div.innerHTML = `
-//     <h3 class="font-orbitron text-xl mb-3">Passenger ${index}</h3>
-//     <div class="grid md:grid-cols-2 gap-6 mb-4">
-//       <div>
-//         <label class="block text-sm font-semibold mb-2">First Name</label>
-//         <input type="text" class="first-name w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter first name">
-//       </div>
-//       <div>
-//         <label class="block text-sm font-semibold mb-2">Last Name</label>
-//         <input type="text" class="last-name w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter last name">
-//       </div>
-//       <div>
-//         <label class="block text-sm font-semibold mb-2">Email</label>
-//         <input type="email" class="email w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter email">
-//       </div>
-//       <div>
-//         <label class="block text-sm font-semibold mb-2">Phone</label>
-//         <input type="tel" class="phone w-full bg-space-dark border border-neon-blue/30 rounded-md p-3" placeholder="Enter phone">
-//       </div>
-//     </div>
-//   `;
-//   return div;
-// }
-// //Fonction pour la validation de formalaire de booking
-// function  validatePassengerForm(){
-//  const firsNames=document.querySelectorAll(".first-name");
-//  const lastNames=document.querySelectorAll(".last-name");
-//  const emails=document.querySelectorAll(".email");
-//  const phones=document.querySelectorAll(".phone");
-//  let valid=true;
-
-//  for(let i=0;i<firsNames.length;i++){
-//     if(!validateName(firsNames[i].value) || !validateName(lastNames[i].value) ||!validateEmail(emails[i].value) ||!validatePhone(phones[i].value)){
-//         alert(`Erreur dans le formulaire du passager ${i+1}`);
-//         valid=false;
-//         break;
-// }
-//  }
-//       if(valid){
-//           alert("tout les passages sont valide");
-//       }
-// }
-
-// //fonction pour  nom 
-// function  validateName(name){
-//     const regex=/^[A-Z-a-z]{2,20}$/;
-//      return regex.test(name.trim());
-// }
-// //fonction pour email
-// function validateEmail(email){
-//     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-//     return regex.test(email.trim());
-// }
-// //fonction pour phone
-// function validatePhone(phone){
-//     const regex=/^[0-9]{8,15}$/;
-//     return regex.test(phone.trim());
-// }
-
-// document.querySelector(".btn-confirm-booking").addEventListener("click",(e)=>{
-//     e.preventDefault();
-//      validatePassengerForm();
-
-// });
-
-// //fonction accodimation
-// let accommodations_data = [];
-
-// // Charger les accommodations
-// function loadAccommodations() {
-//     fetch("accommodations.json")
-//         .then(res => res.json())
-//         .then(data => {
-//             localStorage.setItem("accommodations", JSON.stringify(data.accommodations));
-//             accommodations_data = data.accommodations;
-//             console.log("Accommodations chargées :", accommodations_data);
-//         })
-//         .catch(err => console.log("Erreur JSON accommodations:", err));
-// }
-
-// // Afficher les accommodations selon la destination sélectionnée
-// function showAccommodations(destinationId) {
-//     const container = document.getElementById("accommodations-container");
-//     container.innerHTML = ""; 
-
-//     const filtered = accommodations_data.filter(acc => acc.availableOn.includes(destinationId));
-
-//     filtered.forEach(acc => {
-//         const div = document.createElement("div");
-//         div.className = "p-4 rounded-lg border border-neon-blue/20 bg-space-blue/40 hover:border-neon-blue/70 hover:shadow-lg transition";
-//         div.innerHTML = `
-//             <h4 class="font-semibold text-neon-blue mb-2">${acc.name}</h4>
-//             <p class="text-gray-300 text-sm">${acc.shortDescription}</p>
-//             <p class="text-gray-300 text-sm">$${acc.pricePerDay}/day</p>
-
-//         `;
-//         container.appendChild(div);
-//     });
-// }
-
-// // changement de destination
-// document.getElementById("SelectDestination").addEventListener("change", (e) => {
-//     const selectedDestination = e.target.value;
-//     if (selectedDestination) {
-//         showAccommodations(selectedDestination);
-//     } else {
-//         document.getElementById("accommodations-container").innerHTML = "";
-//     }
-// });
-// loadData();           
-// loadAccommodations(); 
-// //fonction de calcule le prix
-// // 🔹 دالة لإظهار الوجهات داخل select
-// function loadDestinations() {
-//   const select = document.getElementById("SelectDestination");
-//   for (let i = 0; i < destinations_data.length; i++) {
-//     const opt = document.createElement("option");
-//     opt.value = destinations_data[i].id;
-//     opt.textContent = destinations_data[i].name;
-//     select.appendChild(opt);
-//   }
-// }
-
-// // 🔹 دالة لإظهار الإقامات الخاصة بكل وجهة
-// function showAccommodations(destinationId) {
-//   const container = document.getElementById("accommodations-container");
-//   container.innerHTML = ""; // نفرغ القديم
-
-//   const filtered = accommodations_data.filter(function(acc) {
-//     return acc.availableOn.includes(destinationId);
-//   });
-
-//   for (let i = 0; i < filtered.length; i++) {
-//     const acc = filtered[i];
-//     const div = document.createElement("div");
-//     div.className = "p-4 border rounded-lg cursor-pointer hover:bg-blue-900/20";
-//     div.setAttribute("data-id", acc.id);
-//     div.innerHTML = `
-//       <h4 class="font-semibold">${acc.name}</h4>
-//       <p>$${acc.pricePerDay}/day</p>
-//     `;
-//     div.addEventListener("click", function() {
-//       calculatePrice(destinationId, acc.id);
-//     });
-//     container.appendChild(div);
-//   }
-// }
-
-// // 🔹 دالة تبحث في البيانات بالـ id
-// function findDataById(data_arr, selected_id) {
-//   for (let i = 0; i < data_arr.length; i++) {
-//     if (data_arr[i].id === selected_id) {
-//       return data_arr[i];
-//     }
-//   }
-//   return null;
-// }
-
-// // 🔹 دالة تحسب الثمن الكلي
-// function calculatePrice(selectedDestId, selectedAccommId) {
-//   const totalDiv = document.getElementById("total-price");
-
-//   const destObject = findDataById(destinations_data, selectedDestId);
-//   const accObject = findDataById(accommodations_data, selectedAccommId);
-
-//   if (!destObject || !accObject) {
-//     totalDiv.textContent = "$0.00";
-//     return;
-//   }
-
-//   const total = destObject.price + accObject.pricePerDay;
-//   totalDiv.textContent = "Total: $" + total.toLocaleString();
-// }
-
-// // 🔹 منين المستخدم يختار الوجهة
-// document.getElementById("SelectDestination").addEventListener("change", function() {
-//   const selectedDestId = this.value;
-//   if (selectedDestId) {
-//     showAccommodations(selectedDestId);
-//   } else {
-//     document.getElementById("accommodations-container").innerHTML = "";
-//     document.getElementById("total-price").textContent = "$0.00";
-//   }
-// });
-
-// // 🔹 نحمّلو الوجهات أول مرة
-// loadDestinations();
 tailwind.config = {
   theme: {
     extend: {
@@ -443,7 +177,6 @@ function loadDestinations() {
     .then(function(res){ return res.json(); })
     .then(function(data){
       destinationsData = data.destinations;
-
       const select = document.getElementById("destination");
       destinationsData.forEach(function(dest){
         const opt = document.createElement("option");
@@ -646,16 +379,53 @@ console.log(bookings);
 });
 
 //La page my booking pour afficher les inforamtions de booking avec un ticket
-const container=document.getElementById("booking-list");
-bookings.forEach(bookings=>{
-const card=document.createElement("div");
-card.className = "p-4 border rounded-lg bg-gray-900 text-white";
-card.innerHTML=`
-  <h3 class="text-x1 font-bold">Bokking#
-  <p><strong>Destination:</strong>${bookings.destination}<p>
-  <p<<strong>Total Price:</strong>${bookings.price}</p>
-  <h4 class="mt-2 font-semibold">Passenger:<h4>
-    `;
-  
-}) 
+document.addEventListener("DOMContentLoaded", () => {
 
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    const container = document.getElementById("booking-list");
+
+    if (!container) {
+        console.error("booking-list NOT FOUND in HTML");
+        return;
+    }
+
+    if (bookings.length === 0) {
+        container.innerHTML = `
+            <p class="text-gray-300 text-center text-lg">No bookings found.</p>
+        `;
+        return;
+    }
+
+    container.innerHTML = bookings.map(b => `
+        <div class="bg-space-dark/70 border border-neon-blue/40 backdrop-blur-md p-6 rounded-2xl mb-6 shadow-lg">
+            
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-orbitron text-neon-cyan">${b.destination}</h2>
+                <span class="text-sm text-gray-400">#${b.id}</span>
+            </div>
+
+            <p class="text-gray-300">
+                <span class="font-semibold text-neon-purple">Date:</span> ${b.date}
+            </p>
+
+            <p class="text-gray-300 mt-1">
+                <span class="font-semibold text-neon-purple">Total Price:</span> 
+                <span class="text-neon-blue font-bold">${b.price} $</span>
+            </p>
+
+            <div class="mt-4">
+                <h3 class="text-lg font-semibold text-neon-purple">Passengers</h3>
+                <ul class="mt-2 space-y-1">
+                    ${b.passengers.map(p => `
+                        <li class="text-gray-300 ml-4">
+                            • <span class="font-semibold">${p.firstName} ${p.lastName}</span>  
+                            <span class="text-gray-400">(${p.email})</span>
+                        </li>
+                    `).join("")}
+                </ul>
+            </div>
+
+        </div>
+    `).join("");
+
+});
