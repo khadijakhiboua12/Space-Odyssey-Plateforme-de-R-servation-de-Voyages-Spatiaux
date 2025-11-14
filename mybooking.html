@@ -190,7 +190,7 @@
     <div id="booking-list" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
   </div>
 
-  <!-- Modal -->
+ 
   <div id="ticket-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
     <div class="bg-space-dark p-6 rounded-2xl w-11/12 md:w-2/3 max-h-[90vh] overflow-auto">
       <div id="ticket-content"></div>
@@ -212,7 +212,7 @@
       <div class="bg-space-dark/70 border border-neon-blue/40 backdrop-blur-md p-6 rounded-2xl shadow-lg">
         <div class="flex justify-between items-center mb-4">
           <h2 class="text-2xl font-orbitron text-neon-cyan">${b.destination}</h2>
-          <span class="text-sm text-gray-400">#${b.id}</span>
+        
         </div>
         <p class="text-gray-300"><strong>Date:</strong> ${b.date}</p>
         <p class="text-gray-300 mt-1"><strong>Total Price:</strong> <span class="text-neon-blue font-bold">${b.price} $</span></p>
@@ -222,15 +222,22 @@
             ${b.passengers.map(p => `<li class="text-gray-300 ml-4">• <span class="font-semibold">${p.firstName} ${p.lastName}</span> <span class="text-gray-400">(${p.email})</span></li>`).join("")}
           </ul>
         </div>
-        <div class="flex justify-end mt-4">
+        <div class="flex justify-end mt-4 gap-x-4">
           <button onclick="viewTicket(${b.id})" class="px-4 py-2 rounded-xl bg-green-500/20 border border-green-400/40 text-green-300 hover:bg-green-500/30 transition">
             View Ticket
           </button>
+
+          <button 
+        onclick="deleteBooking(${b.id})"
+        class="px-4 py-2 rounded-xl bg-red-500/20 border border-red-400/40 text-red-300 hover:bg-red-500/30 transition">
+         Supprimer
+       </button>
+
         </div>
       </div>
     `).join("");
 
-    // Ouvrir modal et injecter ticket
+    // imprimer le ticket
     function viewTicket(id) {
       const ticket = bookings.find(b => b.id == id);
       if(!ticket) return alert("Ticket not found");
@@ -260,8 +267,16 @@
       document.body.innerHTML = printContents;
       window.print();
       document.body.innerHTML = originalContents;
-      location.reload(); // pour rétablir l'état original
+      location.reload(); 
     }
+    function deleteBooking(id) {
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    bookings = bookings.filter(b => b.id !== id);
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+    
+    location.reload();
+}
+
   </script>
 </body>
 

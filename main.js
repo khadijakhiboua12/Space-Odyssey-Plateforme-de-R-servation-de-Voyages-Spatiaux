@@ -25,8 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (userFound) {
                 alert("Connexion réussie !");
                 localStorage.setItem("loggedUser", JSON.stringify(userFound));
-                // window.location.href = "index.html";
-                window.location.href= "destinations.html";
+                window.location.href= "index.html";
             } else {
                 alert("Email ou mot de passe incorrect !");
             }
@@ -84,17 +83,7 @@ let destinationsData = [];
 let passengerCount = 1;
 let maxPassengers = 1;
 
-// create stars
-// function createStars() {
-//   const container = document.getElementById("stars-container");
-//   for (let i = 0; i < 100; i++) {
-//     const s = document.createElement("div");
-//     s.classList.add("star");
-//     s.style.left = Math.random() * 100 + "%";
-//     s.style.top = Math.random() * 100 + "%";
-//     container.appendChild(s);
-//   }
-// }
+
 
 // update total price
 function updateTotalPrice() {
@@ -261,7 +250,7 @@ function attachValidation(input) {
   input.addEventListener("input", function(){ validateField(input); });
 }
 
-// init
+
 document.addEventListener("DOMContentLoaded", function(){
   createStars();
   loadAccommodations().then(function(){
@@ -378,54 +367,3 @@ console.log(bookings);
   window.location.href = "mybooking.html";
 });
 
-//La page my booking pour afficher les inforamtions de booking avec un ticket
-document.addEventListener("DOMContentLoaded", () => {
-
-    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-    const container = document.getElementById("booking-list");
-
-    if (!container) {
-        console.error("booking-list NOT FOUND in HTML");
-        return;
-    }
-
-    if (bookings.length === 0) {
-        container.innerHTML = `
-            <p class="text-gray-300 text-center text-lg">No bookings found.</p>
-        `;
-        return;
-    }
-
-    container.innerHTML = bookings.map(b => `
-        <div class="bg-space-dark/70 border border-neon-blue/40 backdrop-blur-md p-6 rounded-2xl mb-6 shadow-lg">
-            
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-orbitron text-neon-cyan">${b.destination}</h2>
-                <span class="text-sm text-gray-400">#${b.id}</span>
-            </div>
-
-            <p class="text-gray-300">
-                <span class="font-semibold text-neon-purple">Date:</span> ${b.date}
-            </p>
-
-            <p class="text-gray-300 mt-1">
-                <span class="font-semibold text-neon-purple">Total Price:</span> 
-                <span class="text-neon-blue font-bold">${b.price} $</span>
-            </p>
-
-            <div class="mt-4">
-                <h3 class="text-lg font-semibold text-neon-purple">Passengers</h3>
-                <ul class="mt-2 space-y-1">
-                    ${b.passengers.map(p => `
-                        <li class="text-gray-300 ml-4">
-                            • <span class="font-semibold">${p.firstName} ${p.lastName}</span>  
-                            <span class="text-gray-400">(${p.email})</span>
-                        </li>
-                    `).join("")}
-                </ul>
-            </div>
-
-        </div>
-    `).join("");
-
-});
